@@ -60,36 +60,6 @@
             background: #3b82f6;
             border-radius: 4px;
         }
-
-        /* Hiệu ứng click chuột nốt nhạc */
-        .click-note-effect {
-            position: fixed;
-            width: 42px;
-            height: 42px;
-            object-fit: contain;
-            pointer-events: none;
-            user-select: none;
-            z-index: 9999;
-            border-radius: 10px;
-            filter: drop-shadow(0 6px 12px rgba(37, 99, 235, 0.35));
-            transform: translate(-50%, -50%) scale(0.4);
-            animation: noteClickFloat 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-        }
-
-        @keyframes noteClickFloat {
-            0% {
-                opacity: 0.95;
-                transform: translate(-50%, -50%) scale(0.45) rotate(0deg);
-            }
-            40% {
-                opacity: 1;
-                transform: translate(calc(-50% + var(--drift-x, 0px) * 0.5), calc(-50% - 28px)) scale(1.08) rotate(var(--rot-mid, 12deg));
-            }
-            100% {
-                opacity: 0;
-                transform: translate(calc(-50% + var(--drift-x, 0px)), calc(-50% - 72px)) scale(0.75) rotate(var(--rot-end, 24deg));
-            }
-        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 dark:bg-mathDark-900 dark:text-slate-100 transition-colors duration-300 antialiased selection:bg-blue-500 selection:text-white">
@@ -708,30 +678,6 @@
                 : 'Resume download will be enabled when you attach your CV.pdf file.';
             alert(msg);
         }
-
-        // Hiệu ứng click chuột bằng ảnh nốt nhạc
-        document.addEventListener('click', function (e) {
-            const note = document.createElement('img');
-            note.src = 'nốt nhạc.jpg';
-            note.alt = 'Nốt nhạc';
-            note.className = 'click-note-effect';
-
-            const driftX = ((Math.random() - 0.5) * 36).toFixed(1) + 'px';
-            const rotMid = ((Math.random() - 0.5) * 28).toFixed(1) + 'deg';
-            const rotEnd = ((Math.random() - 0.5) * 48).toFixed(1) + 'deg';
-
-            note.style.left = e.clientX + 'px';
-            note.style.top = e.clientY + 'px';
-            note.style.setProperty('--drift-x', driftX);
-            note.style.setProperty('--rot-mid', rotMid);
-            note.style.setProperty('--rot-end', rotEnd);
-
-            document.body.appendChild(note);
-
-            note.addEventListener('animationend', function () {
-                note.remove();
-            }, { once: true });
-        });
     </script>
     
 <!-- QR CODE CHUYỂN KHOẢN -->
@@ -761,6 +707,3 @@
 
 </body>
 </html>
-```[cite: 1, 2]
-
-Bạn có muốn mình tinh chỉnh thêm tốc độ bay lên, kích thước nốt nhạc hay đổi sang link ảnh trực tiếp trên GitHub của bạn không?
